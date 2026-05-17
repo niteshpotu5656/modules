@@ -1,10 +1,10 @@
-resource "aws_db_subnet_group" "main" {{
-  name       = "${{var.identifier}}-subnet-group"
+resource "aws_db_subnet_group" "main" {
+  name       = "${var.identifier}-subnet-group"
   subnet_ids = var.subnet_ids
-  tags       = merge(var.tags, {{ Name = "${{var.identifier}}-subnet-group" }})
-}}
+  tags       = merge(var.tags, { Name = "${var.identifier}-subnet-group" })
+}
 
-resource "aws_db_instance" "main" {{
+resource "aws_db_instance" "main" {
   identifier              = var.identifier
   engine                  = var.engine
   engine_version          = var.engine_version
@@ -22,5 +22,5 @@ resource "aws_db_instance" "main" {{
   backup_retention_period = var.environment == "prod" ? 7 : 1
   deletion_protection     = var.environment == "prod" ? true : false
   skip_final_snapshot     = var.environment == "prod" ? false : true
-  tags                    = merge(var.tags, {{ Name = var.identifier }})
-}}
+  tags                    = merge(var.tags, { Name = var.identifier })
+}
